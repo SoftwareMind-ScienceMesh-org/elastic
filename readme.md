@@ -46,3 +46,5 @@ EOF
 kubectl get secret quickstart-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode; echo
 
 kubectl expose pod elastic-es-default-0 --type=NodePort --name=elastic-svc
+
+docker run --rm -it -v ~/git/elastic/logstash/pipeline:/usr/share/logstash/pipeline/  -v ~/git/elastic/logstash/settings/logstash.yml:/usr/share/logstash/config/logstash.yml -e ELASTIC_PASSWORD=password docker.elastic.co/logstash/logstash:8.6.2

@@ -1,0 +1,9 @@
+http:
+  host: "0.0.0.0"
+xpack:
+  monitoring:
+    enabled: true
+    elasticsearch:
+      username: 'elastic'
+      password: "${ELASTIC_PASSWORD}"
+      hosts: ["https://rds.softwaremind.com:443"]
