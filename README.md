@@ -3,6 +3,7 @@ kubectl create -f https://download.elastic.co/downloads/eck/2.6.1/crds.yaml
 
 kubectl apply -f https://download.elastic.co/downloads/eck/2.6.1/operator.yaml
 
+```
 cat <<EOF >> elastic.yaml
 apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
@@ -16,11 +17,13 @@ spec:
     config:
       node.store.allow_mmap: false
 EOF
+```
 
 kubectl apply -f elastic.yaml
 
 #PASSWORD=$(kubectl get secret elastic-es-elastic-user -o go-template='{{.data.elastic | base64decode}}')
 
+```
 cat <<EOF >> kibana.yaml
 apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
@@ -38,6 +41,7 @@ spec:
   config:
     server.publicBaseUrl: https://rds.softwaremind.com
 EOF
+```
 
 kubectl get secret quickstart-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode; echo
 
