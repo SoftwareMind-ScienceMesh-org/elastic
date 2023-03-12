@@ -1,0 +1,15 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+spec:
+  version: 8.6.2
+  count: 1
+  elasticsearchRef:
+    name: elastic
+  http:
+    service:
+      spec:
+        type: LoadBalancer # default is ClusterIP  
+  config:
+    server.publicBaseUrl: https://rds.softwaremind.com
