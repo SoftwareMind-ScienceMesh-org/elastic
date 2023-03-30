@@ -1,3 +1,4 @@
+DEPLOY ELASTIC ON THE CLUSTER
 
 kubectl create -f https://download.elastic.co/downloads/eck/2.6.1/crds.yaml
 
@@ -23,6 +24,10 @@ kubectl apply -f elastic.yaml
 
 #PASSWORD=$(kubectl get secret elastic-es-elastic-user -o go-template='{{.data.elastic | base64decode}}')
 
+
+------------------------------------------------------
+DEPLOY KIBANA ON THE CLUSTER
+
 ```
 cat <<EOF >> kibana.yaml
 apiVersion: kibana.k8s.elastic.co/v1
@@ -43,8 +48,16 @@ spec:
 EOF
 ```
 
-kubectl get secret quickstart-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode; echo
-
 kubectl expose pod elastic-es-default-0 --type=NodePort --name=elastic-svc
 
-docker run  --rm -p 5959:5959 -d -v ~/git/elastic/logstash/pipeline:/usr/share/logstash/pipeline/  -v ~/git/elastic/logstash/settings/logstash.yml:/usr/share/logstash/config/logstash.yml -e ELASTIC_PASSWORD=password docker.elastic.co/logstash/logstash:8.6.2
+#------------------------------------------------------
+RUN LOGSTASH ON DOCKER
+
+./run-logstash.sh
+
+
+OR:
+
+ELA_PASSWORD=$(kubectl get secret elastic-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode)
+
+docker run  --rm -p 5959:5959 -d -v ~/git/elastic/logstash/pipeline:/usr/share/logstash/pipeline/  -v ~/git/elastic/logstash/settings/logstash.yml:/usr/share/logstash/config/logstash.yml -e ELASTIC_PASSWORD=$ELA_PASSWORD docker.elastic.co/logstash/logstash:8.6.2

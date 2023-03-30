@@ -7,3 +7,6 @@ xpack:
       username: 'elastic'
       password: "${ELASTIC_PASSWORD}"
       hosts: ["https://rds.softwaremind.com:443"]
+config:
+  reload:
+    automatic: true
