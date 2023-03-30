@@ -50,7 +50,7 @@ EOF
 
 kubectl expose pod elastic-es-default-0 --type=NodePort --name=elastic-svc
 
-#------------------------------------------------------
+------------------------------------------------------
 RUN LOGSTASH ON DOCKER
 
 ./run-logstash.sh
