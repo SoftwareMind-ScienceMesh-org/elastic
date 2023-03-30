@@ -46,7 +46,7 @@ spec:
       spec:
         type: LoadBalancer
   config:
-    server.publicBaseUrl: https://rds.softwaremind.com
+    server.publicBaseUrl: https://swan.softwaremind.com
 EOF
 ```
 
