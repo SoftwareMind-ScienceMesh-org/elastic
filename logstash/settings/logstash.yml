@@ -5,7 +5,7 @@ xpack:
     enabled: true
     elasticsearch:
       username: 'elastic'
-      password: "${ELA_PASSWORD}"
+      password: "${ELASTIC_PASSWORD}"
       hosts: ["https://rds.softwaremind.com:443"]
 config:
   reload:
