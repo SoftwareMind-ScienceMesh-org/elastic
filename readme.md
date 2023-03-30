@@ -22,6 +22,8 @@ EOF
 
 kubectl apply -f elastic.yaml
 
+kubectl expose pod elastic-es-default-0 --type=NodePort --name=elastic-svc
+
 #PASSWORD=$(kubectl get secret elastic-es-elastic-user -o go-template='{{.data.elastic | base64decode}}')
 
 
@@ -47,8 +49,6 @@ spec:
     server.publicBaseUrl: https://rds.softwaremind.com
 EOF
 ```
-
-kubectl expose pod elastic-es-default-0 --type=NodePort --name=elastic-svc
 
 ------------------------------------------------------
 RUN LOGSTASH ON DOCKER
